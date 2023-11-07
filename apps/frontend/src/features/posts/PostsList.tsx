@@ -1,3 +1,5 @@
+// import { addPost, getPosts } from '../../services/database/indexedDB';
+// import { useEffect } from 'react';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import { FaTimes } from 'react-icons/fa';
 import { Button } from '../../components';
@@ -6,6 +8,27 @@ import { Post } from '../../types/Post';
 
 const PostsList = () => {
     const { data: posts, isLoading, isError } = useGetPostsQuery(undefined, { refetchOnMountOrArgChange: true });
+    const isOnline = navigator.onLine;
+    console.log('PostsList ~ isOnline:', isOnline);
+
+    // useEffect(() => {
+    //     const savePostsToIndexedDB = async () => {
+    //         if (posts) {
+    //             for (const post of posts) {
+    //                 await addPost(post);
+    //             }
+    //         }
+    //     };
+    //     savePostsToIndexedDB();
+    // }, [posts]);
+
+    // if (isError) {
+    //     const getPostFromIndexedDB = async () => {
+    //         const data = await getPosts();
+    //         console.log('getPostFromIndexedDB ~ data:', data);
+    //     };
+    //     getPostFromIndexedDB();
+    // }
 
     const [removePost] = useDeletePostMutation();
     const [toggleFavoriteStatus] = useUpdatePostMutation();

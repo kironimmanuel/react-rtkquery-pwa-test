@@ -172,6 +172,7 @@ label {
     border-radius: var(--radius);
     box-shadow: var(--light-shadow);
     transition: var(--transition);
+    padding: 2rem;
 }
 
 .post-form h3 {
@@ -237,8 +238,8 @@ textarea::placeholder {
     cursor: pointer;
     transition: var(--transition);
     border-radius: var(--radius);
-    width: 100%;
     font-size: 12px;
+    width: 100%;
 }
 
 .submit-btn {

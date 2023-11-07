@@ -9,18 +9,23 @@
     "scripts": {
         "dev": "concurrently \"npm:dev:*\"",
         "dev:backend": "cd apps/backend && npm run start:dev",
-        "dev:frontend": "cd apps/frontend && npm start",
+        "dev:frontend": "cd apps/frontend && npm run dev",
         "build": "concurrently \"npm:build:*\"",
         "build:backend": "cd apps/backend && npm run build",
         "build:frontend": "cd apps/frontend && npm run build",
         "prod": "concurrently \"npm:prod:*\"",
         "prod:backend": "cd apps/backend && npm run start:prod",
-        "prod:frontend": "cd apps/frontend && npm run serve"
+        "prod:frontend": "cd apps/frontend && npm run preview",
+        "postinstall": "cd apps/backend && npx prisma migrate dev --name init"
     },
     "keywords": [],
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "concurrently": "^8.2.2"
+        "concurrently": "^8.2.2",
+        "idb": "^7.1.1"
+    },
+    "devDependencies": {
+        "vite-plugin-pwa": "^0.16.7"
     }
 }

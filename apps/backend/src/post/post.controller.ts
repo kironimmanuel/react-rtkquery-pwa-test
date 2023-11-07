@@ -13,7 +13,7 @@ import { Post as BlogPost } from '@prisma/client';
 import { CreatePostDto, UpdatePostDto } from './dto/post.dto';
 import { PostService } from './post.service';
 
-@Controller('posts')
+@Controller('api/v1/posts')
 export class PostController {
   constructor(private readonly postService: PostService) {}
 
