@@ -1,5 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { set } from 'idb-keyval';
 import { Post } from '../../types/Post';
+import { messages } from './messages/post.messages';
 
 export const apiSlice = createApi({
     reducerPath: 'api',
@@ -10,6 +12,16 @@ export const apiSlice = createApi({
             query: () => '/posts',
             transformResponse: (res: Post[]) => res.sort((a, b) => b.id - a.id),
             providesTags: ['Posts'],
+            onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
+                try {
+                    const { data } = await queryFulfilled;
+                    set('posts', data)
+                        .then(() => console.log(messages.GET_POST_SUCCESS.message))
+                        .catch(error => console.log(messages.GET_POST_ERROR.message, error));
+                } catch (error) {
+                    console.log(messages.GET_POST_ERROR.message, error);
+                }
+            },
         }),
         addPost: builder.mutation<void, Omit<Post, 'id'>>({
             query: post => ({

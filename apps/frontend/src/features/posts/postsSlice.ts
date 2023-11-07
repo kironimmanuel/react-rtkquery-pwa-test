@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Post } from '../../types/Post';
-import { messages } from './messages/post.messages';
 
 interface PostsState {
     posts: Post[];
@@ -14,6 +13,9 @@ const postsSlice = createSlice({
     name: 'posts',
     initialState,
     reducers: {
+        setPostsReducer: (state, action: PayloadAction<Post[]>) => {
+            state.posts = action.payload;
+        },
         addPostReducer: {
             reducer(state, action: PayloadAction<Post>) {
                 state.posts.push(action.payload);
@@ -34,6 +36,6 @@ const postsSlice = createSlice({
     },
 });
 
-export const { addPostReducer, updatePostReducer, deletePostReducer } = postsSlice.actions;
+export const { addPostReducer, updatePostReducer, deletePostReducer, setPostsReducer } = postsSlice.actions;
 
 export const postsReducer = postsSlice.reducer;
