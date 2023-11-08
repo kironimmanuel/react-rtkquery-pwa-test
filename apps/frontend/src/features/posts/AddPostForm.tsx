@@ -1,6 +1,6 @@
 import { FormEvent, useState } from 'react';
 import { Button } from '../../components';
-import { useAddPostMutation } from '../../services';
+import useCreatePost from './hooks/useCreatePost';
 
 const intitalFormState = {
     title: '',
@@ -8,8 +8,8 @@ const intitalFormState = {
 };
 
 const AddPostForm = () => {
+    const { createPost, isPending } = useCreatePost();
     const [formData, setFormData] = useState(intitalFormState);
-    const [addPost] = useAddPostMutation();
 
     const handleChange = (e: FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.currentTarget;
@@ -18,8 +18,12 @@ const AddPostForm = () => {
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
-        addPost(formData);
-        clearInputs();
+        createPost(formData, {
+            onSuccess: () => {
+                setFormData(intitalFormState);
+                clearInputs();
+            },
+        });
     };
 
     const clearInputs = () => {
@@ -59,7 +63,7 @@ const AddPostForm = () => {
             </div>
 
             <div className='btn-container'>
-                <Button className='submit-btn' label='Submit post' type='submit' />
+                <Button className='submit-btn' label={isPending ? 'Loading...' : 'Submit post'} type='submit' />
                 <Button className='clear-btn' onClick={clearInputs} label='clear inputs' type='reset' />
             </div>
         </form>

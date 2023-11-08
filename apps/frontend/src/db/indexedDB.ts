@@ -1,5 +1,5 @@
 import { openDB } from 'idb';
-import { Post } from '../../types/Post';
+import { Post } from '../types/Post';
 
 const dbName = 'myDatabase';
 const storeName = 'posts';

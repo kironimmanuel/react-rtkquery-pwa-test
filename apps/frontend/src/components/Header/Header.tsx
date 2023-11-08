@@ -1,7 +1,11 @@
-const Header = () => {
+interface Props {
+    title: string;
+}
+
+const Header = ({ title }: Props) => {
     return (
         <header>
-            <h1>React Vite PWA</h1>
+            <h1>{title}</h1>
         </header>
     );
 };

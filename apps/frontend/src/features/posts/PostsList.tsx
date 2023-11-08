@@ -1,50 +1,37 @@
-// import { addPost, getPosts } from '../../services/database/indexedDB';
-// import { useEffect } from 'react';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import { FaTimes } from 'react-icons/fa';
 import { Button } from '../../components';
-import { useDeletePostMutation, useGetPostsQuery, useUpdatePostMutation } from '../../services';
 import { Post } from '../../types/Post';
+import useDeletePost from './hooks/useDeleteTask';
+import useEditPost from './hooks/useEditTask';
+import useFetchTasks from './hooks/useFetchPosts';
 
 const PostsList = () => {
-    const { data: posts, isLoading, isError } = useGetPostsQuery(undefined, { refetchOnMountOrArgChange: true });
-    const isOnline = navigator.onLine;
-    console.log('PostsList ~ isOnline:', isOnline);
+    const { data: posts, isError, isLoading } = useFetchTasks();
+    const { editPost } = useEditPost();
+    const { deletePost } = useDeletePost();
 
-    // useEffect(() => {
-    //     const savePostsToIndexedDB = async () => {
-    //         if (posts) {
-    //             for (const post of posts) {
-    //                 await addPost(post);
-    //             }
-    //         }
-    //     };
-    //     savePostsToIndexedDB();
-    // }, [posts]);
-
-    // if (isError) {
-    //     const getPostFromIndexedDB = async () => {
-    //         const data = await getPosts();
-    //         console.log('getPostFromIndexedDB ~ data:', data);
-    //     };
-    //     getPostFromIndexedDB();
-    // }
-
-    const [removePost] = useDeletePostMutation();
-    const [toggleFavoriteStatus] = useUpdatePostMutation();
+    // const isOnline = navigator.onLine;
+    // console.log('PostsList ~ isOnline:', isOnline);
 
     const PostItem = ({ post }: { post: Post }) => (
         <li key={post.id} className={`post ${post.isFavorite ? 'favorite' : ''}`}>
             <div>
-                <h3>{post.title}</h3>
+                <h2>{post.title}</h2>
                 <p>{post.content}</p>
             </div>
             <Button
                 className='favorite-btn'
+                ariaLabel='Favorite post'
                 label={post.isFavorite ? <AiFillHeart /> : <AiOutlineHeart />}
-                onClick={() => toggleFavoriteStatus({ ...post, isFavorite: !post.isFavorite })}
+                onClick={() => editPost({ ...post, isFavorite: !post.isFavorite })}
             />
-            <Button className='delete-btn' label={<FaTimes />} onClick={() => removePost(post.id)} />
+            <Button
+                className='delete-btn'
+                ariaLabel='Delete post'
+                label={<FaTimes />}
+                onClick={() => deletePost(post.id)}
+            />
         </li>
     );
 

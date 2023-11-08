@@ -148,6 +148,12 @@ label {
     font-size: 1rem;
 }
 
+a {
+    display: block;
+    text-align: center;
+    margin-top: 0.25rem;
+}
+
 .app-container {
     padding: 5rem 0;
 }
