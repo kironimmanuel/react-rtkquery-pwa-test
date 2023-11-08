@@ -8,14 +8,15 @@
     ],
     "scripts": {
         "dev": "concurrently \"npm:dev:*\"",
-        "dev:backend": "cd apps/backend && npm start:dev",
+        "dev:backend": "cd apps/backend && npm start",
         "dev:frontend": "cd apps/frontend && npm start",
         "build": "concurrently \"npm:build:*\"",
         "build:backend": "cd apps/backend && npm run build",
         "build:frontend": "cd apps/frontend && npm run build",
-        "prod": "concurrently \"npm:prod:*\"",
-        "prod:backend": "cd apps/backend && npm start:prod",
-        "prod:frontend": "cd apps/frontend && npm serve"
+        "start": "concurrently \"npm:start:*\"",
+        "start:backend": "cd apps/backend && npm run start:prod",
+        "start:frontend": "cd apps/frontend && npm run preview",
+        "postinstall": "cd apps/backend && npx prisma migrate dev --name init"
     },
     "keywords": [],
     "author": "",

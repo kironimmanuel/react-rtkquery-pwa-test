@@ -3,7 +3,7 @@ import { Post } from '../../types/Post';
 
 export const apiSlice = createApi({
     reducerPath: 'api',
-    baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:8000' }),
+    baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:8000/api/v1' }),
     tagTypes: ['Posts'],
     endpoints: builder => ({
         getPosts: builder.query<Post[], void>({
