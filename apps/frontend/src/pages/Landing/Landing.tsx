@@ -10,6 +10,7 @@ const Landing = () => {
             <PostsList />
             <Footer />
             <Link href='/about'>About</Link>
+            <Link href='/form-creator'>Form Creator</Link>
         </main>
     );
 };

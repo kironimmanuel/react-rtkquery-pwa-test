@@ -16,3 +16,19 @@ model Post {
   content    String
   isFavorite Boolean?
 }
+
+model Form {
+  id        Int         @id @default(autoincrement())
+  name      String
+  fields    FormField[]
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+}
+
+model FormField {
+  id     Int    @id @default(autoincrement())
+  name   String
+  value  String
+  form   Form   @relation(fields: [formId], references: [id])
+  formId Int
+}

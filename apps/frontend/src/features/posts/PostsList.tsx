@@ -4,10 +4,10 @@ import { Button } from '../../components';
 import { Post } from '../../types/Post';
 import useDeletePost from './hooks/useDeleteTask';
 import useEditPost from './hooks/useEditTask';
-import useFetchTasks from './hooks/useFetchPosts';
+import useFetchPosts from './hooks/useFetchPosts';
 
 const PostsList = () => {
-    const { data: posts, isError, isLoading } = useFetchTasks();
+    const { data: posts, isError, isLoading } = useFetchPosts();
     const { editPost } = useEditPost();
     const { deletePost } = useDeletePost();
 

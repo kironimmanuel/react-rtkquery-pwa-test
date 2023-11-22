@@ -12,7 +12,8 @@ const About = () => {
                 inventore, hic nisi quidem iste illum, cumque voluptatum?
             </p>
             <Footer />
-            <Link href='/'>Zurück</Link>
+            <Link href='/'>Home</Link>
+            <Link href='/form-creator'>Form Creator</Link>
         </main>
     );
 };

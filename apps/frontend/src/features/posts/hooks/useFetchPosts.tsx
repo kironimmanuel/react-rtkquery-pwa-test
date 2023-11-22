@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { customAxiosFetch } from '../../../lib/customAxiosFetch';
 import { Post } from '../../../types/Post';
 
-const useFetchTasks = () => {
+const useFetchPosts = () => {
     const { data, error, isError, isLoading } = useQuery({
         queryKey: ['posts'],
         queryFn: async () => {
@@ -13,4 +13,4 @@ const useFetchTasks = () => {
 
     return { data, error, isError, isLoading };
 };
-export default useFetchTasks;
+export default useFetchPosts;
