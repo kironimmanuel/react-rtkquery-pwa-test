@@ -5,7 +5,7 @@ import { FormsList } from '../../features';
 const FormCreator = () => {
     return (
         <main className='app-container'>
-            <Header title='Form Creator' />
+            <Header title='Formular' />
             <FormsList />
             <Footer />
             <Link href='/'>Home</Link>

@@ -1,0 +1,69 @@
+{
+    "form": {
+        "model": {
+            "datasets": [
+                {
+                    "id": "default",
+                    "elements": [
+                        {
+                            "id": "record",
+                            "type": "number",
+                            "nullable": false,
+                            "precision": 12
+                        },
+                        {
+                            "id": "name",
+                            "type": "text",
+                            "nullable": false,
+                            "maxlength": 20
+                        },
+                        {
+                            "id": "email",
+                            "type": "text",
+                            "nullable": true,
+                            "maxlength": 50
+                        },
+                        {
+                            "id": "birthday",
+                            "type": "date",
+                            "nullable": false,
+                            "script": "calculateAge"
+                        }
+                    ]
+                },
+                {
+                    "id": "tabelle",
+                    "elements": [
+                        {
+                            "id": "record",
+                            "type": "number",
+                            "nullable": false,
+                            "precision": 12
+                        },
+                        {
+                            "id": "role",
+                            "type": "select",
+                            "nullable": false,
+                            "options": ["admin", "user", "guest"]
+                        },
+                        {
+                            "id": "adminID",
+                            "type": "number",
+                            "nullable": false,
+                            "precision": 12,
+                            "condition": "role === 'admin'"
+                        },
+                        {
+                            "id": "isFavorite",
+                            "type": "checkbox",
+                            "nullable": false
+                        }
+                    ]
+                }
+            ]
+        },
+        "scripts": {
+            "calculateAge": "function calculateAge() { var birthday = new Date($form.model.default.birthday); var ageDifMs = Date.now() - birthday.getTime(); var ageDate = new Date(ageDifMs); return Math.abs(ageDate.getUTCFullYear() - 1970); }"
+        }
+    }
+}
